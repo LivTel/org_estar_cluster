@@ -12,7 +12,7 @@ import org.estar.astrometry.*;
  * This class extends org.estar.astrometry.CelestialObject, for containing the extra data contained
  * in a Cluster star object.
  * @author Chris Mottram
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * @see org.estar.astrometry.CelestialObject
  */
 public class ClusterObject extends CelestialObject
@@ -20,7 +20,7 @@ public class ClusterObject extends CelestialObject
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: ClusterObject.java,v 1.1 2002-12-29 22:03:49 cjm Exp $";
+	public final static String RCSID = "$Id: ClusterObject.java,v 1.2 2003-02-27 20:36:10 cjm Exp $";
 	/**
 	 * Token index.
 	 */
@@ -113,6 +113,11 @@ public class ClusterObject extends CelestialObject
 	 * <pre>
 	 * 0       1  08 20 41.696 +13 58 50.58   967.449   274.266    -14.490      0.003   05
 	 * </pre>
+	 * However, some fake/test catalogues do not have a [+|-] sign in front of the degrees,
+	 * so we must watch for this and add the sign. e.g.:
+	 * <pre>
+	 *    1      1   01 10 12.71   60 04 14.37   254.180   142.627     18.810      0.056   00
+	 * </pre>
 	 * The space-separated fields are:
 	 * <ul>
 	 * <li>field number.
@@ -135,6 +140,7 @@ public class ClusterObject extends CelestialObject
 	 * @param s The string to parse.
 	 * @param colourCount The number of magnitudes in the list.
 	 * @param colourNameStringList The names of the magnitudes.
+	 * @exception IllegalArgumentException Thrown if an argument was out of bounds.
 	 * @see #fieldNumber
 	 * @see #starNumber
 	 * @see #xPixel
@@ -158,7 +164,8 @@ public class ClusterObject extends CelestialObject
 	 * @see #TOKEN_INDEX_OFFSET_FLAG
 	 * @see #TOKEN_MAGNITUDE_DATA_COUNT
 	 */
-	public void parseStarLine(String s,int colourCount,String colourNameStringList[]) throws IllegalArgumentException
+	public void parseStarLine(String s,int colourCount,String colourNameStringList[]) 
+		throws IllegalArgumentException
 	{
 		RA ra = null;
 		Dec dec = null;
@@ -201,7 +208,14 @@ public class ClusterObject extends CelestialObject
 				break;
 			case TOKEN_INDEX_DECD:
 				signChar = tokenString.charAt(0);
-				tokenString = tokenString.substring(1,tokenString.length());
+				// if sign char was a plus or minus, dec degrees is rest of tokenString
+				// if sign char was not +|-, assume '+' and parse whole tokenString
+				if((signChar == '+')|| (signChar == '-'))
+				{
+					tokenString = tokenString.substring(1,tokenString.length());
+				}
+				else
+					signChar = '+';
 				decd = Integer.parseInt(tokenString);
 				break;
 			case TOKEN_INDEX_DECM:
@@ -281,4 +295,7 @@ public class ClusterObject extends CelestialObject
 }
 /*
 ** $Log: not supported by cvs2svn $
+** Revision 1.1  2002/12/29 22:03:49  cjm
+** Initial revision
+**
 */
