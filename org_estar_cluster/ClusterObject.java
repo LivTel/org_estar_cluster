@@ -12,7 +12,7 @@ import org.estar.astrometry.*;
  * This class extends org.estar.astrometry.CelestialObject, for containing the extra data contained
  * in a Cluster star object.
  * @author Chris Mottram
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * @see org.estar.astrometry.CelestialObject
  */
 public class ClusterObject extends CelestialObject
@@ -20,7 +20,7 @@ public class ClusterObject extends CelestialObject
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: ClusterObject.java,v 1.2 2003-02-27 20:36:10 cjm Exp $";
+	public final static String RCSID = "$Id: ClusterObject.java,v 1.3 2005-05-23 13:38:36 cjm Exp $";
 	/**
 	 * Token index.
 	 */
@@ -273,7 +273,23 @@ public class ClusterObject extends CelestialObject
 		w.write("\n");
 	}
 
+	/**
+	 * Method to print out a string representation of this cluster object.
+	 * @return The string.
+	 * @see #toString(java.lang.String)
+	 */
 	public String toString()
+	{
+		return toString("");
+	}
+
+	/**
+	 * Method to print out a string representation of this cluster object.
+	 * @param prefix A prefix to prepend to the string.
+	 * @return The string.
+	 * @see #toString(java.lang.String)
+	 */
+	public String toString(String prefix)
 	{
 		DecimalFormat df = null;
 		DecimalFormat dfd = null;
@@ -283,7 +299,7 @@ public class ClusterObject extends CelestialObject
 		df = new DecimalFormat("00");
 		dfd = new DecimalFormat("0.000");
 		sb = new StringBuffer();
-		sb.append(""+fieldNumber+" "+starNumber+" "+ra.toString(' ')+" "+dec.toString(' ')+" "+
+		sb.append(prefix+fieldNumber+" "+starNumber+" "+ra.toString(' ')+" "+dec.toString(' ')+" "+
 			  dfd.format(xPixel)+" "+dfd.format(yPixel));
 		for(index = 0;index < magnitudeCount; index ++)
 		{
@@ -295,6 +311,10 @@ public class ClusterObject extends CelestialObject
 }
 /*
 ** $Log: not supported by cvs2svn $
+** Revision 1.2  2003/02/27 20:36:10  cjm
+** Fixed parseStarLine so it copes with broken Decs that occur in various fake files.
+** e.g. Decs with no sign in front of the degrees.
+**
 ** Revision 1.1  2002/12/29 22:03:49  cjm
 ** Initial revision
 **
