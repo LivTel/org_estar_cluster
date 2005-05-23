@@ -13,7 +13,7 @@ import org.estar.astrometry.*;
  * Cluster format files contain a list of stars, their position, in RA/DEC and pixel positions.
  * It can also contain magnitude information.
  * @author Chris Mottram
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * @see ClusterObject
  */
 public class Cluster
@@ -21,7 +21,7 @@ public class Cluster
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: Cluster.java,v 1.2 2003-02-23 11:27:39 cjm Exp $";
+	public final static String RCSID = "$Id: Cluster.java,v 1.3 2005-05-23 13:39:02 cjm Exp $";
 	/**
 	 * The number of colours in the catalogue.
 	 */
@@ -93,6 +93,16 @@ public class Cluster
 		}
 	}
 
+	/**
+	 * Method to save a cluster file to the specified Writer
+	 * @param w The writer.
+	 * @exception IOException Thrown if an IO error occurs.
+	 * @see #writeColourCountLine
+	 * @see #writeColourNameListLine
+	 * @see ClusterObject#write
+	 * @see #starList
+	 * @see #commentString
+	 */
 	public void save(Writer w) throws IOException
 	{
 		Iterator iterator = null;
@@ -112,21 +122,99 @@ public class Cluster
 		}
 	}
 
+	/**
+	 * Method returns the list of stars.
+	 * @return The list of stars.
+	 * @see #starList
+	 */
 	public List getStarList()
 	{
 		return starList;
 	}
 
+	/**
+	 * Method returns the number of stars in the list.
+	 * @return The number of stars.
+	 * @see #starList
+	 */
 	public int getStarListCount()
 	{
 		return starList.size();
 	}
 
+	/**
+	 * Get information on the star at index in the cluster list.
+	 * @param index The index in the list.
+	 * @return Information on the specified star.
+	 * @see #starList
+	 * @see ClusterObject
+	 */
 	public ClusterObject getStar(int index)
 	{
 		return (ClusterObject)(starList.get(index));
 	}
 
+	/**
+	 * Method to print out a string representation of this cluster file.
+	 * @return The string.
+	 * @see #toString(java.lang.String)
+	 */
+	public String toString()
+	{
+		return toString("");
+	}
+
+	/**
+	 * Method to print the contents of a cluster file to a string.
+	 * @param prefix A prefix string to prepend to every line.
+	 * @see #writeColourCountLine
+	 * @see #writeColourNameListLine
+	 * @see ClusterObject#write
+	 * @see #starList
+	 * @see #commentString
+	 */
+	public String toString(String prefix)
+	{
+		StringBuffer sb = null;
+		Iterator iterator = null;
+		ClusterObject clusterObject = null;
+		int index;
+
+		sb = new StringBuffer();
+		// colour line count
+		sb.append(prefix+colourCount+" "+colourCommentString+"\n");
+		// colour name list line
+		sb.append(prefix);
+		for(index = 0;index < colourCount;index++)
+		{
+			sb.append(colourNameList[index]);
+			if(index < (colourCount-1))
+				sb.append(" ");
+		}
+	        sb.append("\n");
+		// comment
+		if(commentString != null)
+			sb.append(prefix+commentString+"\n");
+		else
+			sb.append(prefix+"\n");
+		// list of stars
+		iterator = starList.iterator();
+		while(iterator.hasNext())
+		{
+			clusterObject = (ClusterObject)(iterator.next());
+			sb.append(clusterObject.toString(prefix)+"\n");
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * Static method to load and instansiate a Cluster object from the specified file.
+	 * @param file The file to load.
+	 * @return An Cluster object instance.
+	 * @exception FileNotFoundException Thrown if the file doesnot exist.
+	 * @exception IOException Thrown if there is a problem with the load.
+	 * @see #load(java.io.BufferedReader)
+	 */
 	public static Cluster load(File file) throws FileNotFoundException,IOException
 	{
 		Cluster c = null;
@@ -139,6 +227,13 @@ public class Cluster
 		return c;
 	}
 
+	/**
+	 * Static method to load and instansiate a Cluster object from the specified URL.
+	 * @param url The URL to load from.
+	 * @return An Cluster object instance.
+	 * @exception IOException Thrown if there is a problem with the load.
+	 * @see #load(java.io.BufferedReader)
+	 */
 	public static Cluster load(URL url) throws IOException
 	{
 		Cluster c = null;
@@ -151,6 +246,13 @@ public class Cluster
 		return c;
 	}
 
+	/**
+	 * Static method to load and instansiate a Cluster object from the specified string.
+	 * @param s A string containing the contents of a cluster file.
+	 * @return An Cluster object instance.
+	 * @exception IOException Thrown if there is a problem with the load.
+	 * @see #load(java.io.BufferedReader)
+	 */
 	public static Cluster load(String s) throws IOException
 	{
 		Cluster c = null;
@@ -234,11 +336,25 @@ public class Cluster
 		starList.add(co);
 	}
 
+	/**
+	 * Method to write out the colour count line.
+	 * @param w The writer to write to.
+	 * @exception IOException Thrown if the write fails.
+	 * @see #colourCount
+	 * @see #colourCommentString
+	 */
 	protected void writeColourCountLine(Writer w) throws IOException
 	{
 		w.write(""+colourCount+" "+colourCommentString+"\n");
 	}
 
+	/**
+	 * Method to write out the colour name list.
+	 * @param w The writer to write to.
+	 * @exception IOException Thrown if the write fails.
+	 * @see #colourCount
+	 * @see #colourNameList
+	 */
 	protected void writeColourNameListLine(Writer w) throws IOException
 	{
 		int index;
@@ -314,6 +430,9 @@ public class Cluster
 }
 /*
 ** $Log: not supported by cvs2svn $
+** Revision 1.2  2003/02/23 11:27:39  cjm
+** Added load method from string.
+**
 ** Revision 1.1  2002/12/29 22:03:49  cjm
 ** Initial revision
 **
