@@ -1,3 +1,22 @@
+/*   
+    Copyright 2006, Astrophysics Research Institute, Liverpool John Moores University.
+
+    This file is part of org.estar.cluster.
+
+    org.estar.cluster is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    org.estar.cluster is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with org.estar.cluster; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 // Cluster.java
 package org.estar.cluster;
 
@@ -13,7 +32,7 @@ import org.estar.astrometry.*;
  * Cluster format files contain a list of stars, their position, in RA/DEC and pixel positions.
  * It can also contain magnitude information.
  * @author Chris Mottram
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see ClusterObject
  */
 public class Cluster
@@ -21,7 +40,7 @@ public class Cluster
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: Cluster.java,v 1.3 2005-05-23 13:39:02 cjm Exp $";
+	public final static String RCSID = "$Id: Cluster.java,v 1.4 2007-01-30 18:34:06 cjm Exp $";
 	/**
 	 * The number of colours in the catalogue.
 	 */
@@ -430,6 +449,10 @@ public class Cluster
 }
 /*
 ** $Log: not supported by cvs2svn $
+** Revision 1.3  2005/05/23 13:39:02  cjm
+** Added toString method with prefix.
+** Added comments.
+**
 ** Revision 1.2  2003/02/23 11:27:39  cjm
 ** Added load method from string.
 **

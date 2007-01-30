@@ -1,3 +1,22 @@
+/*   
+    Copyright 2006, Astrophysics Research Institute, Liverpool John Moores University.
+
+    This file is part of org.estar.cluster.
+
+    org.estar.cluster is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    org.estar.cluster is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with org.estar.cluster; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 // ClusterObject.java
 package org.estar.cluster;
 
@@ -12,7 +31,7 @@ import org.estar.astrometry.*;
  * This class extends org.estar.astrometry.CelestialObject, for containing the extra data contained
  * in a Cluster star object.
  * @author Chris Mottram
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see org.estar.astrometry.CelestialObject
  */
 public class ClusterObject extends CelestialObject
@@ -20,7 +39,7 @@ public class ClusterObject extends CelestialObject
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: ClusterObject.java,v 1.3 2005-05-23 13:38:36 cjm Exp $";
+	public final static String RCSID = "$Id: ClusterObject.java,v 1.4 2007-01-30 18:34:07 cjm Exp $";
 	/**
 	 * Token index.
 	 */
@@ -311,6 +330,9 @@ public class ClusterObject extends CelestialObject
 }
 /*
 ** $Log: not supported by cvs2svn $
+** Revision 1.3  2005/05/23 13:38:36  cjm
+** Added toString method with prefix.
+**
 ** Revision 1.2  2003/02/27 20:36:10  cjm
 ** Fixed parseStarLine so it copes with broken Decs that occur in various fake files.
 ** e.g. Decs with no sign in front of the degrees.
