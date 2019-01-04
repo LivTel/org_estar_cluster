@@ -1,0 +1,3 @@
+#!/bin/csh
+cd /home/dev/bin/estar/classes
+java org.estar.cluster.Cluster $*
