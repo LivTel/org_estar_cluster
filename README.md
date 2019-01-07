@@ -1,0 +1,1 @@
+This library contains software for handling "cluster" files, obscure ancient text data files containing photometric data. This data format is used for passing photometric data in RTML documents, so some org_estar_rtml test programs import this library. 
