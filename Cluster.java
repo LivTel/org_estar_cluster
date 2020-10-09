@@ -32,7 +32,7 @@ import org.estar.astrometry.*;
  * Cluster format files contain a list of stars, their position, in RA/DEC and pixel positions.
  * It can also contain magnitude information.
  * @author Chris Mottram
- * @version $Revision: 1.4 $
+ * @version $Revision$
  * @see ClusterObject
  */
 public class Cluster
@@ -40,7 +40,7 @@ public class Cluster
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: Cluster.java,v 1.4 2007-01-30 18:34:06 cjm Exp $";
+	public final static String RCSID = "$Id$";
 	/**
 	 * The number of colours in the catalogue.
 	 */

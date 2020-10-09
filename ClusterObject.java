@@ -31,7 +31,7 @@ import org.estar.astrometry.*;
  * This class extends org.estar.astrometry.CelestialObject, for containing the extra data contained
  * in a Cluster star object.
  * @author Chris Mottram
- * @version $Revision: 1.4 $
+ * @version $Revision$
  * @see org.estar.astrometry.CelestialObject
  */
 public class ClusterObject extends CelestialObject
@@ -39,7 +39,7 @@ public class ClusterObject extends CelestialObject
 	/**
 	 * Revision control system version id.
 	 */
-	public final static String RCSID = "$Id: ClusterObject.java,v 1.4 2007-01-30 18:34:07 cjm Exp $";
+	public final static String RCSID = "$Id$";
 	/**
 	 * Token index.
 	 */
